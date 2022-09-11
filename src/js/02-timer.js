@@ -19,8 +19,6 @@ refs.startBtn.addEventListener('click', () => {
   timer.start();
 });
 
-let endTime = null;
-
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -66,8 +64,13 @@ class Timer {
       if (deltaTime <= 1000) {
         clearInterval(this.intervalId);
       }
-      const { days, hours, minutes, seconds } = convertMs(deltaTime);
+      const { days, hours, minutes, seconds } = this.convertMs(deltaTime);
       console.log(`${days}':${hours}:${minutes}:${seconds}`);
+
+      document.querySelector('[data-days]').innerHTML = days;
+      document.querySelector('[data-hours]').innerHTML = hours;
+      document.querySelector('[data-minutes]').innerHTML = minutes;
+      document.querySelector('[data-seconds]').innerHTML = seconds;
     }, 1000);
   }
 
