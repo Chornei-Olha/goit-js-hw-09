@@ -1,5 +1,6 @@
 // Описан в документации
 import flatpickr from 'flatpickr';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 // Дополнительный импорт стилей
 import 'flatpickr/dist/flatpickr.min.css';
@@ -30,7 +31,7 @@ const options = {
       // Таймер удаляется
       clearInterval(timer);
       // Выводит сообщение что время закончилось
-      window.alert('Please choose a date in the future');
+      Notify.success('Please choose a date in the future');
     } else {
       refs.startBtn.removeAttribute('disabled');
       endTime = selectedDates[0];
