@@ -104,10 +104,10 @@ const timer = new Timer({
 });
 
 function timerShow({ days, hours, minutes, seconds }) {
-  refs.days.textContent = `${days}`;
-  refs.hours.textContent = `${hours}`;
-  refs.minutes.textContent = `${minutes}`;
-  refs.seconds.textContent = `${seconds}`;
+  (refs.days.textContent = `${days}`),
+    (refs.hours.textContent = `${hours}`),
+    (refs.minutes.textContent = `${minutes}`),
+    (refs.seconds.textContent = `${seconds}`);
 }
 
 // Инициализация библиотеки
