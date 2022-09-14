@@ -1,15 +1,19 @@
 import flatpickr from 'flatpickr';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'flatpickr/dist/flatpickr.min.css';
+
 const refs = {
   startBtn: document.querySelector('[data-start]'), // Берём кнопку запуска
   timerShow: document.querySelector('.timer'), // Берём блок для показа времени
-  days: document.querySelector('[data-days').innerHTML,
-  hours: document.querySelector('[data-hours').innerHTML,
-  minutes: document.querySelector('[data-minutes').innerHTML,
-  seconds: document.querySelector('[data-seconds').innerHTML,
 };
+document.querySelector('[data-start]').setAttribute('disabled', '');
+
 let endTime = null;
+
+//   Принимает число, приводит к строке и добавляет в начало 0, если число меньше 2-х знаков
+function pad(value) {
+  return String(value).padStart(2, '0');
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -18,19 +22,16 @@ function convertMs(ms) {
   const hour = minute * 60;
   const day = hour * 24;
   // Remaining days
-  const days = Math.floor(ms / day);
+  const days = pad(Math.floor(ms / day));
   // Remaining hours
-  const hours = Math.floor((ms % day) / hour);
+  const hours = pad(Math.floor((ms % day) / hour));
   // Remaining minutes
-  const minutes = Math.floor(((ms % day) % hour) / minute);
+  const minutes = pad(Math.floor(((ms % day) % hour) / minute));
   // Remaining seconds
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  const seconds = pad(Math.floor((((ms % day) % hour) % minute) / second));
   return { days, hours, minutes, seconds };
 }
-//   Принимает число, приводит к строке и добавляет в начало 0, если число меньше 2-х знаков
-function pad(value) {
-  return String(value).padStart(2, '0');
-}
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -69,10 +70,13 @@ class Timer {
     }, 1000);
   }
   timerShow({ days, hours, minutes, seconds }) {
-    refs.days.textContent = pad(days);
-    refs.hours.textContent = pad(hours);
-    refs.minutes.textContent = pad(minutes);
-    refs.seconds.textContent = pad(seconds);
+    // document.querySelector('[data-days]').innerHTML = days;
+    // document.querySelector('[data-hours]').innerHTML = hours;
+    // document.querySelector('[data-minutes]').innerHTML = minutes;
+    // document.querySelector('[data-seconds]').innerHTML = seconds;
+
+    const timerEl = `${days} : ${hours} : ${minutes} : ${seconds}`;
+    document.querySelector('.timer').innerHTML = timerEl;
   }
 }
 const timer = new Timer();

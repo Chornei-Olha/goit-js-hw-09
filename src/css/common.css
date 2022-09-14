@@ -16,3 +16,14 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.label {
+  display: none;
+}
+
+.timer {
+  display: flex;
+  color: rgb(170, 18, 18);
+  font-weight: 600;
+  font-size: 80px;
+}
